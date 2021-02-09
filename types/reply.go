@@ -1,39 +1,39 @@
-package main
+package types
 
-type reply struct {
+type Reply struct {
 	Code    int    `json:"code"`    // 返回码
 	Message string `json:"message"` // 错误信息
-	Data    data   `json:"data"`
+	Data    Data   `json:"data"`
 }
 
-type data struct {
-	Page    page      `json:"page"`
-	Replies []replies `json:"replies"`
+type Data struct {
+	Page    Page      `json:"page"`
+	Replies []Replies `json:"replies"`
 }
 
-type page struct {
+type Page struct {
 	Num    int `json:"num"`    // 当前页码
 	Size   int `json:"size"`   // 每页项数
 	Count  int `json:"count"`  // 根评论条数
 	Acount int `json:"acount"` // 总计评论条数
 }
 
-type replies struct {
+type Replies struct {
 	Oid       int     `json:"oid"`       // 评论区Id
-	Type      int     `json:"type"`      // 评论区类型
+	Type      int     `json:"types"`      // 评论区类型
 	Mid       int     `json:"mid"`       // 发送者uid
 	FansGrade int     `json:"fansgrade"` // 粉丝标签 0-无，1-有  TODO ？好像数据不对？
 	Ctime     int64   `json:"ctime"`     // 评论发送时间戳
-	Member    member  `json:"member"`    // 评论发送者信息
-	Content   content `json:"content"`   // 评论内容
+	Member    Member  `json:"member"`    // 评论发送者信息
+	Content   Content `json:"content"`   // 评论内容
 }
 
-type member struct {
+type Member struct {
 	Mid   string `json:"mid"`   // 评论者uid
 	Uname string `json:"uname"` // 评论者昵称
 }
 
-type content struct {
+type Content struct {
 	Message string `json:"message"` // 评论内容
 	Plat    int    `json:"plat"`    // 评论发送端 1-web 2-android 3-ios 4-wp
 }

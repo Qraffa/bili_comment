@@ -1,25 +1,21 @@
-package main
+package config
 
 import (
-	"github.com/spf13/viper"
 	"log"
+
+	"github.com/spf13/viper"
 )
 
-type config struct {
+type Config struct {
+	Uid   string `mapstructure:"uid"`  // 用户uid
+	Page  int    `mapstructure:"page"` // 动态列表页数
 	CType string `mapstructure:"type"`
 	Oid   string `mapstructure:"oid"`
 }
 
-var (
-	cfg *config
-)
-
-func init() {
-	cfg = &config{}
-}
-
 // 读取配置文件
-func getCfg() {
+func Cfg() *Config {
+	cfg := &Config{}
 	viper.SetConfigName("config")
 	viper.AddConfigPath(".")
 	err := viper.ReadInConfig()
@@ -31,4 +27,5 @@ func getCfg() {
 		log.Fatal("Unmarshal config error")
 	}
 	log.Printf("Read config OK\n")
+	return cfg
 }

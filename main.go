@@ -1,35 +1,23 @@
 package main
 
 import (
-	"bufio"
+	"bili_comment/api"
+	"bili_comment/config"
 	"fmt"
-	"log"
-	"os"
+	"runtime"
 )
 
 func main() {
-	//Run("11","111910707")
-	//Run("1", "801617312")
-	//run("12", "9317174")
-	getCfg()
-	run(cfg.CType, cfg.Oid)
-	fmt.Println("*********************************")
-	fmt.Printf("去重整合后，共%d人\n", len(set))
+	cfg := config.Cfg()
 
-	printInfo()
+	api.Run(cfg.Uid, cfg.Page)
 
 	fmt.Println("DONE!!!")
 
-}
-
-func printInfo() {
-	f, err := os.OpenFile("out.txt", os.O_APPEND, 0777)
-	if err != nil {
-		log.Fatal(fmt.Sprintf("open file error ===> %s\n Create the file <out.txt> and try again.", err.Error()))
+	if runtime.GOOS == "windows" {
+		// EXIT
+		var tmp string
+		fmt.Println("press enter to exit...")
+		fmt.Scanln(&tmp)
 	}
-	buf := bufio.NewWriter(f)
-	for k, v := range set {
-		buf.WriteString(fmt.Sprintf("评论者uid: %s 评论者昵称: %s 评论内容: %s\n", k.Mid, k.Uname, v))
-	}
-	buf.Flush()
 }
