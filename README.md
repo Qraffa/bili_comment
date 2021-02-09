@@ -1,5 +1,6 @@
 `config.yml`配置文件中，uid为目标用户uid，page为需要的动态列表页数
-使用：
+
+### 使用：
 1. 在配置文件中配置好uid和page，run main.go
 2. 输出结果保存在`out_xxx`文件夹中，`xxx`对应时间戳
 
